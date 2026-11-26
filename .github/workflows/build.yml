@@ -8,7 +8,7 @@ jobs:
       - name: Descomprimir proyectos
         run: |
           mkdir work
-          unzip -q mods.zip -d work
+          unzip -q ./*.zip -d work
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
