@@ -16,14 +16,8 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.10.2
-      - name: Compilar Creeper Pastel
-        run: gradle -p work/creeper-pastel build
       - name: Compilar Dron
         run: gradle -p work/dron build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: creeper-pastel-mod
-          path: work/creeper-pastel/build/libs/creeper-pastel-1.0.0.jar
       - uses: actions/upload-artifact@v4
         with:
           name: dron-mod
