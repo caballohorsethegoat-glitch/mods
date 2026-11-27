@@ -8,7 +8,7 @@ jobs:
       - name: Descomprimir proyectos
         run: |
           mkdir work
-          unzip -q ./*.zip -d work
+          for z in *.zip; do unzip -q "$z" -d work; done
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -16,9 +16,15 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.10.2
-      - name: Compilar Dron
-        run: gradle -p work/dron build
+      - name: Compilar todos los mods
+        run: |
+          for d in work/*/; do
+            echo "=== Compilando $d ==="
+            gradle -p "$d" build
+          done
       - uses: actions/upload-artifact@v4
         with:
-          name: dron-mod
-          path: work/dron/build/libs/dron-mod-1.0.0.jar
+          name: mods
+          path: |
+            work/*/build/libs/*.jar
+            !work/*/build/libs/*-sources.jar
